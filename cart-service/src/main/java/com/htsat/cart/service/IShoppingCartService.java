@@ -1,11 +1,13 @@
 package com.htsat.cart.service;
 
 import com.htsat.cart.exception.DeleteException;
+import com.htsat.cart.exception.InsertException;
 import com.htsat.cart.exception.SearchException;
 import com.htsat.cart.exception.UpdateException;
 import com.htsat.cart.dto.SKUDTO;
 import com.htsat.cart.dto.ShoppingCartDTO;
 import com.htsat.cart.model.REcCartsku;
+import com.htsat.cart.model.REcShoppingcart;
 import com.htsat.cart.model.REcSku;
 
 import java.util.List;
@@ -13,9 +15,11 @@ import java.util.List;
 public interface IShoppingCartService {
     /*********************************************check******************************************/
 
-    boolean checkSingleSKUParam(SKUDTO skudto, REcSku sku);
+    boolean checkShoppingCartByUserId(Long userId);
 
-    boolean checkSKUParam(List<SKUDTO> skudtoList, List<REcSku> skuList);
+//    boolean checkSingleSKUParam(SKUDTO skudto, REcSku sku);
+
+//    boolean checkSKUParam(List<SKUDTO> skudtoList, List<REcSku> skuList);
 
     List<REcSku> getSKUListByDTOList(List<SKUDTO> skudtoList);
 
@@ -23,7 +27,9 @@ public interface IShoppingCartService {
 
     /*********************************************create******************************************/
 
-    void addShoppingCartAndSKU(ShoppingCartDTO shoppingCartDTO) throws Exception;
+    void createShoppingCartAndSKU(ShoppingCartDTO shoppingCartDTO) throws InsertException;
+
+//    void addShoppingCartAndSKU(ShoppingCartDTO shoppingCartDTO) throws InsertException;
 
     /*********************************************search******************************************/
 
@@ -33,13 +39,13 @@ public interface IShoppingCartService {
 
     /*********************************************delete******************************************/
 
-    void deleteShoppingCartAndSKU(Long userId) throws DeleteException;
+    void deleteShoppingCartAndSKU(Long cartid) throws DeleteException;
 
     /*********************************************update******************************************/
 
 //    ShoppingCartDTO updateShoppingCartAndSKU(int type, ShoppingCartDTO shoppingCartDTO) throws UpdateException;
 
-    void updateShoppingCartSKU(ShoppingCartDTO shoppingCartDTO) throws UpdateException;
+    void updateShoppingCartSKU(ShoppingCartDTO shoppingCartDTO, Long userid, Long cartid, Long skuid) throws UpdateException;
 
     void deleteShoppingCartSKU(Long cartid, Long skuid) throws UpdateException;
 
